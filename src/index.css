@@ -2,41 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* College Schedule Design System - Soft, elegant pastels for Loly */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Soft background gradients */
+    --background: 318 30% 98%;
+    --foreground: 240 15% 25%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card system with subtle gradients */
+    --card: 320 25% 97%;
+    --card-foreground: 240 15% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 320 25% 97%;
+    --popover-foreground: 240 15% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Soft pink/purple primary palette */
+    --primary: 310 45% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 310 35% 85%;
+    --primary-gradient: linear-gradient(135deg, hsl(310, 45%, 55%), hsl(290, 50%, 65%));
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Gentle secondary colors */
+    --secondary: 260 35% 90%;
+    --secondary-foreground: 240 15% 30%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Soft muted tones */
+    --muted: 310 20% 94%;
+    --muted-foreground: 240 10% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent colors for highlights */
+    --accent: 340 40% 88%;
+    --accent-foreground: 240 15% 30%;
+    --accent-bright: 340 60% 70%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Status colors */
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 60% 50%;
+    --warning: 45 90% 60%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 310 25% 88%;
+    --input: 310 25% 88%;
+    --ring: 310 45% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom design tokens */
+    --gradient-soft: linear-gradient(135deg, hsl(320, 25%, 97%), hsl(310, 30%, 95%));
+    --gradient-header: linear-gradient(135deg, hsl(310, 45%, 55%), hsl(290, 50%, 65%), hsl(340, 40%, 70%));
+    --gradient-card: linear-gradient(145deg, hsl(320, 25%, 98%), hsl(310, 20%, 96%));
+    
+    /* Shadows with color */
+    --shadow-soft: 0 4px 20px hsl(310, 30%, 85%);
+    --shadow-card: 0 8px 25px hsl(310, 25%, 88%);
+    --shadow-float: 0 12px 35px hsl(310, 35%, 80%);
+
+    /* Animation */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
