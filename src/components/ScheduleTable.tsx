@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Clock, MapPin, BookOpen } from "lucide-react";
 
 export interface ScheduleEntry {
@@ -11,6 +12,7 @@ export interface ScheduleEntry {
 
 interface ScheduleTableProps {
   schedule: ScheduleEntry[];
+  viewMode?: 'horizontal' | 'vertical';
 }
 
 const getSubjectColor = (subject: string) => {
@@ -30,9 +32,54 @@ const getSubjectColor = (subject: string) => {
   return colors[Math.abs(hash) % colors.length];
 };
 
-const ScheduleTable = ({ schedule }: ScheduleTableProps) => {
+const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps) => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   
+  if (viewMode === 'vertical') {
+    return (
+      <Card className="overflow-hidden bg-gradient-card shadow-card">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="font-semibold">Day</TableHead>
+              <TableHead className="font-semibold">Time</TableHead>
+              <TableHead className="font-semibold">Subject</TableHead>
+              <TableHead className="font-semibold">Location</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {schedule.map((entry, index) => (
+              <TableRow key={index} className="hover:bg-muted/50">
+                <TableCell className="font-medium">{entry.day}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-muted-foreground" />
+                    <span>{entry.time}</span>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-muted-foreground" />
+                    <Badge className={`${getSubjectColor(entry.subject)} font-medium`}>
+                      {entry.subject}
+                    </Badge>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                    <span>{entry.location}</span>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
+    );
+  }
+
+  // Horizontal card view (default)
   return (
     <div className="space-y-6">
       {days.map(day => {
