@@ -8,13 +8,13 @@ const ScheduleHeader = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-4">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-red-100 bg-clip-text text-transparent">
-              Loly's Schedule
+              loly schedule
             </h1>
             <Heart className="w-8 h-8 text-red-300 animate-pulse" />
           </div>
 
           <p className="text-xl text-primary-foreground/90 max-w-2xl ">
-            Loly imnidaa personal college schedules ✨
+            loly imnidaa personal college schedules ✨
           </p>
         </div>
       </div>

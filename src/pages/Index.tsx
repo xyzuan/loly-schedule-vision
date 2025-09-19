@@ -23,7 +23,7 @@ const Index = () => {
   const [viewMode, setViewMode] = useState<"horizontal" | "vertical">(
     "horizontal"
   );
-  const [showTodayWidget, setShowTodayWidget] = useState(true);
+  const [showTodayWidget, setShowTodayWidget] = useState(false);
   const [currentTextIndex1, setCurrentTextIndex1] = useState(0);
   const [currentTextIndex2, setCurrentTextIndex2] = useState(0);
 
@@ -199,8 +199,8 @@ const Index = () => {
 
       {/* Cute Floating Today's Schedule Widget - Bottom Center */}
       {showTodayWidget && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md animate-in slide-in-from-bottom-full duration-500">
-          <Card className="p-4 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-950 dark:to-purple-950 border-2 border-pink-200 dark:border-pink-800 shadow-2xl backdrop-blur-sm">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 max-w-4xl w-full px-4 animate-in slide-in-from-bottom-full duration-500">
+          <Card className="p-6 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-950 dark:to-purple-950 border-2 border-pink-200 dark:border-pink-800 shadow-2xl backdrop-blur-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <div className="relative">
@@ -289,7 +289,7 @@ const Index = () => {
 
         {/* Cute Show Today Button */}
         {!showTodayWidget && (
-          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
+          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
             <Button
               onClick={() => setShowTodayWidget(true)}
               className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full p-3"
@@ -421,7 +421,6 @@ const Index = () => {
           >
             <Heart className="w-6 h-6 opacity-60" />
           </div>
-
           {/* Middle section - left and right */}
           <div
             className="absolute top-1/4 left-2 text-yellow-400 animate-spin"
@@ -447,7 +446,6 @@ const Index = () => {
           >
             <Star className="w-6 h-6 opacity-60" />
           </div>
-
           {/* Center area */}
           <div
             className="absolute top-1/3 left-1/3 text-purple-300 animate-bounce"
@@ -467,7 +465,6 @@ const Index = () => {
           >
             <Star className="w-6 h-6 opacity-50" />
           </div>
-
           {/* Bottom area */}
           <div
             className="absolute bottom-1/4 left-6 text-pink-500 animate-pulse"
@@ -493,7 +490,6 @@ const Index = () => {
           >
             <Heart className="w-6 h-6 opacity-40" />
           </div>
-
           {/* Extra floating elements for more intensity */}
           <div
             className="absolute top-1/5 left-1/5 text-purple-500 animate-bounce"
@@ -519,8 +515,6 @@ const Index = () => {
           >
             <Sparkles className="w-6 h-6 opacity-60" />
           </div>
-
-          {/* Corner intensifiers */}
           <div
             className="absolute top-2 left-2 text-yellow-500 animate-spin"
             style={{ animationDuration: "10s" }}
@@ -544,6 +538,24 @@ const Index = () => {
             style={{ animationDelay: "6s", animationDuration: "7s" }}
           >
             <Star className="w-4 h-4 opacity-30" />
+          </div>
+        </div>
+
+        {/* Trailing Stars From Top to Bottom */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden z-40">
+          {/* Trailing Star 1 */}
+          <div className="absolute left-1/4 trail-star trail-star-1">
+            <Star className="w-6 h-6 text-yellow-400 drop-shadow-lg" />
+          </div>
+
+          {/* Trailing Star 2 */}
+          <div className="absolute left-2/3 trail-star trail-star-2">
+            <Star className="w-8 h-8 text-amber-500 drop-shadow-lg" />
+          </div>
+
+          {/* Trailing Star 3 */}
+          <div className="absolute left-1/2 trail-star trail-star-3">
+            <Star className="w-5 h-5 text-yellow-300 drop-shadow-lg" />
           </div>
         </div>
 
