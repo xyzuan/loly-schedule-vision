@@ -1,18 +1,26 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Clock, MapPin, BookOpen } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Clock, MapPin, BookOpen, UserIcon } from "lucide-react";
 
 export interface ScheduleEntry {
   day: string;
   time: string;
   subject: string;
   location: string;
+  lecturer: string;
 }
 
 interface ScheduleTableProps {
   schedule: ScheduleEntry[];
-  viewMode?: 'horizontal' | 'vertical';
+  viewMode?: "horizontal" | "vertical";
 }
 
 const getSubjectColor = (subject: string) => {
@@ -23,19 +31,30 @@ const getSubjectColor = (subject: string) => {
     "bg-warning/20 text-warning border-warning/30",
     "bg-secondary/40 text-secondary-foreground border-secondary/60",
   ];
-  
-  const hash = subject.split('').reduce((a, b) => {
-    a = ((a << 5) - a) + b.charCodeAt(0);
+
+  const hash = subject.split("").reduce((a, b) => {
+    a = (a << 5) - a + b.charCodeAt(0);
     return a & a;
   }, 0);
-  
+
   return colors[Math.abs(hash) % colors.length];
 };
 
-const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps) => {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
-  if (viewMode === 'vertical') {
+const ScheduleTable = ({
+  schedule,
+  viewMode = "horizontal",
+}: ScheduleTableProps) => {
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  if (viewMode === "vertical") {
     return (
       <Card className="overflow-hidden bg-gradient-card shadow-card">
         <Table>
@@ -45,6 +64,7 @@ const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps
               <TableHead className="font-semibold">Time</TableHead>
               <TableHead className="font-semibold">Subject</TableHead>
               <TableHead className="font-semibold">Location</TableHead>
+              <TableHead className="font-semibold">Lecturer</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -60,7 +80,11 @@ const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-muted-foreground" />
-                    <Badge className={`${getSubjectColor(entry.subject)} font-medium`}>
+                    <Badge
+                      className={`${getSubjectColor(
+                        entry.subject
+                      )} font-medium`}
+                    >
                       {entry.subject}
                     </Badge>
                   </div>
@@ -70,6 +94,11 @@ const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps
                     <MapPin className="w-4 h-4 text-muted-foreground" />
                     <span>{entry.location}</span>
                   </div>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm text-muted-foreground">
+                    {entry.lecturer}
+                  </span>
                 </TableCell>
               </TableRow>
             ))}
@@ -82,23 +111,26 @@ const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps
   // Horizontal card view (default)
   return (
     <div className="space-y-6">
-      {days.map(day => {
-        const daySchedule = schedule.filter(entry => 
+      {days.map((day) => {
+        const daySchedule = schedule.filter((entry) =>
           entry.day.toLowerCase().includes(day.toLowerCase().slice(0, 3))
         );
-        
+
         if (daySchedule.length === 0) return null;
-        
+
         return (
-          <Card key={day} className="p-6 bg-gradient-card shadow-card hover:shadow-float transition-all duration-300">
+          <Card
+            key={day}
+            className="p-6 bg-gradient-card shadow-card hover:shadow-float transition-all duration-300"
+          >
             <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-gradient-primary" />
               {day}
             </h3>
-            
+
             <div className="grid gap-4">
               {daySchedule.map((entry, index) => (
-                <div 
+                <div
                   key={index}
                   className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-lg bg-card/50 hover:bg-card/80 transition-all duration-200"
                 >
@@ -108,19 +140,26 @@ const ScheduleTable = ({ schedule, viewMode = 'horizontal' }: ScheduleTableProps
                       {entry.time}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 flex-1">
                     <BookOpen className="w-4 h-4 text-muted-foreground" />
-                    <Badge className={`${getSubjectColor(entry.subject)} font-medium`}>
+                    <Badge
+                      className={`${getSubjectColor(
+                        entry.subject
+                      )} font-medium`}
+                    >
                       {entry.subject}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <MapPin className="w-4 h-4" />
-                    <span className="text-sm">
-                      {entry.location}
-                    </span>
+                    <span className="text-sm">{entry.location}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <UserIcon className="w-4 h-4" />
+                    <span className="text-sm">{entry.lecturer}</span>
                   </div>
                 </div>
               ))}
