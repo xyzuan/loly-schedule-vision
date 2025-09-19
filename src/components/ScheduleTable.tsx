@@ -12,11 +12,23 @@ import { Clock, MapPin, BookOpen, UserIcon } from "lucide-react";
 
 export interface ScheduleEntry {
   day: string;
-  time: string;
+  startTime: Date;
+  endTime: Date;
   subject: string;
   location: string;
   lecturer: string;
 }
+
+const formatTimeRange = (startTime: Date, endTime: Date): string => {
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  };
+  return `${formatTime(startTime)} - ${formatTime(endTime)}`;
+};
 
 interface ScheduleTableProps {
   schedule: ScheduleEntry[];
@@ -74,7 +86,9 @@ const ScheduleTable = ({
                 <TableCell>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-muted-foreground" />
-                    <span>{entry.time}</span>
+                    <span>
+                      {formatTimeRange(entry.startTime, entry.endTime)}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell>
@@ -137,7 +151,7 @@ const ScheduleTable = ({
                   <div className="flex items-center gap-2 min-w-[120px]">
                     <Clock className="w-4 h-4 text-muted-foreground" />
                     <span className="font-medium text-foreground">
-                      {entry.time}
+                      {formatTimeRange(entry.startTime, entry.endTime)}
                     </span>
                   </div>
 
